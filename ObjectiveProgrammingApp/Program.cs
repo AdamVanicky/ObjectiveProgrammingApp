@@ -113,12 +113,13 @@ namespace ObjectiveProgrammingApp
                 DopravniProstredek k = obj as DopravniProstredek;
                 if (MaximalniRychlost > k.MaximalniRychlost)
                 {
-                    return MaximalniRychlost;
+                    return 1;
                 }
-                else
+                else if (MaximalniRychlost < k.MaximalniRychlost)
                 {
-                    return k.MaximalniRychlost;
+                    return -1;
                 }
+                else { return 0; }
             }
         }
 
@@ -175,20 +176,24 @@ namespace ObjectiveProgrammingApp
             public int CompareTo(object obj)
             {
                 DopravniProstredek k = obj as DopravniProstredek;
-                if(MaximalniRychlost > k.MaximalniRychlost)
+                if (MaximalniRychlost > k.MaximalniRychlost)
                 {
-                    return MaximalniRychlost;
+                    return 1;
                 }
-                else
+                else if (MaximalniRychlost < k.MaximalniRychlost)
                 {
-                    return k.MaximalniRychlost;
-                }                    
+                    return -1;
+                }
+                else { return 0; }
             }
         }
 
         static void Main(string[] args)
         {
-            ILokalizovatelne[] localizedArr = { new Kolo(20, 500, "Řetěz", 528.4, 111.1), new Auto(120, 1500, "Motor", 400.0, 251.9, 150_000, DateTime.Today), new Auto(150, 3000, "Elektromotor", 450.4, -251.9, 480_999, new DateTime(2025, 5, 19)) };
+            Kolo k1 = new Kolo(20, 500, "Řetěz", 528.4, 111.1);
+            Auto a1 = new Auto(120, 1500, "Motor", 400.0, 251.9, 150_000, DateTime.Today);
+            Auto a2 = new Auto(150, 3000, "Elektromotor", 450.4, -251.9, 480_999, new DateTime(2025, 5, 19));
+            ILokalizovatelne[] localizedArr = { k1, a1, a2 };
 
             foreach(var v in localizedArr)
             {
@@ -216,6 +221,8 @@ Pozice - X{k.X}, Y{k.Y}
 ");
                 }
             }
+
+            IComparable[] compareArr = { k1, a1, a2 };
 
             Console.ReadLine();
         }
